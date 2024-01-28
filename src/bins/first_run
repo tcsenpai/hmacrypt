@@ -1,0 +1,6 @@
+#!/bin/bash
+cd routines
+./1_hmac_secret_enumerate > .device
+./2_hmac_secret_enroll ../.keyfile
+cd ..
+ls -al
