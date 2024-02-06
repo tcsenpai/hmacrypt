@@ -6,3 +6,7 @@ hmaenv
 __pycache__
 public_key.pem
 *.pem
+decrypted.txt
+encrypted.txt
+*.enc
+*.dec
