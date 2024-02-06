@@ -15,15 +15,7 @@ if not os.path.isfile(filepath):
     print("File not found")
     sys.exit(1)
 
-
-# FIXME Do the below operations in chunks
-
-
-# Read the file
-with open(filepath, "rb") as f:
-    filebytes = f.read()
-encodedbytes = hmacrypt.self_encrypt(filebytes, encoded=True)
-
-# Write the file
-with open(filepath + ".enc", "wb") as f:
-    f.write(encodedbytes)
+hmacrypt.self_encrypt_file(filepath, filepath + ".enc")
+print("Encrypted file: " + filepath + ".enc")
+hmacrypt.self_decrypt_file(filepath + ".enc", filepath + ".dec.png")
+print("Decrypted file: " + filepath + ".dec.png")

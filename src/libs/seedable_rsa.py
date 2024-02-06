@@ -4,13 +4,13 @@
 # Motivation: customization and actualization, also less dependencies
 # License: As per original repository
 
+import base64
+import binascii
+from struct import pack
+
 from Crypto.Cipher import PKCS1_OAEP
 from Crypto.Hash import HMAC
 from Crypto.PublicKey import RSA
-from struct import pack
-
-import base64
-import binascii
 
 
 def encrypt(message, public_key, encoded=False):
@@ -33,7 +33,9 @@ def decrypt(encrypted_message, private_key):
 def generate_key(seed, nbytes=2048):
     # based on https://stackoverflow.com/questions/18264314/#answer-18266970
     seed_128 = HMAC.new(
-        bytes(seed, 'utf-8') #  + b'Application: 2nd key derivation' # Please note: this is not needed for the hardware key as the secret is already long enough (usually 128 bytes)
+        bytes(
+            seed, "utf-8"
+        )  #  + b'Application: 2nd key derivation' # Please note: this is not needed for the hardware key as the secret is already long enough (usually 128 bytes)
     ).digest()
 
     class PRNG(object):
@@ -45,8 +47,7 @@ def generate_key(seed, nbytes=2048):
 
         def __call__(self, n):
             while len(self.buffer) < n:
-                self.buffer += HMAC.new(
-                    self.seed + pack("<I", self.index)).digest()
+                self.buffer += HMAC.new(self.seed + pack("<I", self.index)).digest()
                 self.index += 1
             result, self.buffer = self.buffer[:n], self.buffer[n:]
             return result

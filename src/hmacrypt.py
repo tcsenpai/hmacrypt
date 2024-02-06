@@ -1,7 +1,7 @@
 from src.libs.seedable_rsa import generate_key, encrypt, decrypt
 import subprocess
 
-
+# INFO This method is the core of the whole process as it derives a RSA keypair from the stored secret and the hardware key
 def inferKeys(hidePrivate=False, savePublic=False, keyfilePath="src/bins/.keyfile"):
     """Infer keys from the secret stored in the hardware key"""
     hmac_secret_raw = subprocess.check_output(["src/bins/hmac_secret_regenerate", keyfilePath])
@@ -24,6 +24,9 @@ def inferKeys(hidePrivate=False, savePublic=False, keyfilePath="src/bins/.keyfil
             f.write(public_key)
     return private_key, public_key
 
+# NOTE All the below methods generates keys on the fly to avoid persistance
+# NOTE You should NEVER save the keypair to disk or even to a globlal variable
+# NOTE Security is only guaranteed by the observance of the above rule
 
 # STRINGS
 
@@ -39,13 +42,11 @@ def self_decrypt(encrypted):
     secret = decrypt(encrypted, private_key)
     return secret
 
-# FILES
-
-# TODO Encrypt files in chunks to reduce memory usage
+# SMALL FILES
 
 def self_encrypt_file(filepath, outpath):
     """Encrypt file with public key"""
-    private_key, public_key = inferKeys()
+    private_key, public_key = inferKeys(hidePrivate=True)
     with open(filepath, "rb") as f:
         filebytes = f.read()
     encrypted = encrypt(filebytes, public_key, encoded=True)
@@ -62,6 +63,8 @@ def self_decrypt_file(filepath, outpath):
     with open(outpath, "wb") as f:
         f.write(decrypted)
     return outpath
+
+# TODO LARGE FILES
 
 
 # Self testing

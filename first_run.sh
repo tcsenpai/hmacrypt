@@ -1,3 +1,3 @@
 #!/bin/bash
-cd bins
+cd bins || exit
 ./first_run

@@ -1,5 +1,5 @@
 #!/bin/bash
-cd routines
+cd routines || exit
 ./1_hmac_secret_enumerate > .device
 ./2_hmac_secret_enroll ../.keyfile
 cd ..
