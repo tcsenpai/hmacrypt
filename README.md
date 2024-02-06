@@ -27,6 +27,11 @@ On Ubuntu 23.10 (untested on other platforms and flavors):
     sudo apt install libcbor-dev
     sudo apt install libsodium-dev
 
+## FAQ
+
+- A .keyfile without the passphrase AND the hardware key is not usable and won't be recoverable
+- Remember to always "conda activate ./hmaenv" prior to running anything from here
+
 ## Features
 
 - 2fa encryption/decryption using RSA deterministic Key Derivation
@@ -68,8 +73,12 @@ That .keyfile will be used by the various scripts.
 
 ## Documentation and Examples
 
-The present repository contains various easy to use examples in the root folder.
+The present repository contains various easy to use examples in the examples folder.
 Once you have finished setting up your environment (either with the install.sh script or with conda or manually), you can grasp a quick view of this library by executing the examples below.
+
+### Standalone tools
+
+You can also use the standalone tools in the root folder to encrypt / decrypt files and strings.
 
 ### Documentation
 
@@ -171,6 +180,7 @@ This is a creativity test for you: it is a generic file encryptor that uses the 
 - Python 3.11 breaks things in building pycrypto, that's why the prepared env is Python 3.10
 
 ## Disclaimer
+
 This is just an experiment. While it should be safe, please review every step involved before using this in production. 
 
 Also note that your encryption is as secure as your passphrase and your habits.
