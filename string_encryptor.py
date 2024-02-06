@@ -1,0 +1,15 @@
+import src.hmacrypt as hmacrypt
+import sys
+
+# Getting and requiring exactly 1 argument
+if len(sys.argv) != 2:
+    print("Usage: python3 string_encryptor.py <string to encrypt>")
+    sys.exit(1)
+stringToEncrypt = sys.argv[1]
+
+
+
+encrypted = hmacrypt.self_encrypt(stringToEncrypt)
+with open("encrypted.txt", "wb+") as encryptedFile:
+    encryptedFile.write(encrypted)
+print(encrypted)
