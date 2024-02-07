@@ -11,7 +11,7 @@ encrypted.txt
 *.enc
 *.dec
 x86_64*
-conda_meta
+conda-meta
 compiler_compat
 include
 man
@@ -20,3 +20,5 @@ ssl
 cp.png
 *.part
 large_file_encryptor.py
+bin
+lib
