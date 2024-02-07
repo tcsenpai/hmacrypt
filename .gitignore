@@ -10,3 +10,13 @@ decrypted.txt
 encrypted.txt
 *.enc
 *.dec
+x86_64*
+conda_meta
+compiler_compat
+include
+man
+share
+ssl
+cp.png
+*.part
+large_file_encryptor.py
