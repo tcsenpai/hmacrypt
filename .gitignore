@@ -2,7 +2,7 @@
 .keyfile
 test
 test_*
-hmaenv
+hmacenv
 __pycache__
 public_key.pem
 *.pem
@@ -10,15 +10,4 @@ decrypted.txt
 encrypted.txt
 *.enc
 *.dec
-x86_64*
-conda-meta
-compiler_compat
-include
-man
-share
-ssl
-cp.png
 *.part
-large_file_encryptor.py
-bin
-lib

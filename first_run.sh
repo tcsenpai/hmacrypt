@@ -1,3 +1,3 @@
 #!/bin/bash
-cd bins || exit
+cd src/bins || exit
 ./first_run

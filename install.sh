@@ -1,2 +1,2 @@
 #!/bin/bash
-conda env create -f environment.yml -p .
+conda env create -f environment.yml -p ./hmacenv
