@@ -47,27 +47,17 @@ As hardware keys (namely FIDO2 keys) can expose hmac_secret as an extension, and
 
 - Ensure you have miniconda, anaconda or anyway conda
 - Execute the install.sh script
-- Activate the created env (hmaenv, you may have to specify the full path)
+- You can either activate the environment (optionally) or just run the binaries that are configured to use the newly created environment
 - Enjoy
 
-## Manual start
+## Manual start (even outside conda if you have Python <= 3.10)
 
 - Install requirements.txt
 - Enjoy
 
 ## First run
 
-You should be able to run
-
-    ./first_run.sh
-
-Or
-
-    bash first_run.sh
-
-In either case, the script simply runs the same script in bins.
-
-That script will then detect your hardware key with hmac_secret extension and will create a password-protected .keyfile in the bins directory.
+Once enrolled with the install.sh script or by manually executing src/bin/first_run, you will have a password-protected .keyfile in the bins directory.
 
 That .keyfile will be used by the various scripts.
 
@@ -76,9 +66,13 @@ That .keyfile will be used by the various scripts.
 The present repository contains various easy to use examples in the examples folder.
 Once you have finished setting up your environment (either with the install.sh script or with conda or manually), you can grasp a quick view of this library by executing the examples below.
 
+The examples provided allows everybody to use this library programmatically.
+
 ### Standalone tools
 
 You can also use the standalone tools in the root folder to encrypt / decrypt files and strings.
+
+Please note that the tools are just an utility and may not be suited for large data inputs.
 
 ### Documentation
 
@@ -157,11 +151,8 @@ Parameters:
 - filepath (string); the path to the file to be decrypted
 - outpath (string); the path to the decrypted file to be saved
 
+
 ### Examples
-
-#### public_key_saver.py
-
-This is a simple tool that infers a RSA keypair from the hmac_secret provided and the password provided, and saves the public key in this folder.
 
 #### string_encryption_example.py
 
@@ -171,9 +162,6 @@ The script encodes and encrypt a string using the same inferred RSA keypair as a
 
 The script creates, encodes and encrypts a simple text file, then decrypts it using the same keypair as above.
 
-#### file_encryptor.py
-
-This is a creativity test for you: it is a generic file encryptor that uses the above method and is not optimized (for large files for example). You can build from there.
 
 ## Known Issues
 

@@ -1,4 +1,4 @@
-#!/bin/python
+#!./hmacenv/bin/python
 
 import src.hmacrypt as hmacrypt
 import sys
