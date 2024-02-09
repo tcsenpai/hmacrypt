@@ -1,0 +1,19 @@
+#!./hmacenv/bin/python
+
+import src.hmacrypt as hmacrypt
+import sys
+import os
+
+# Getting and requiring exactly 1 argument
+if len(sys.argv) != 3:
+    print("Usage: python3 string_verifier <message> <binary file of the signature>")
+    sys.exit(1)
+
+message = sys.argv[1].encode()
+signaturePath = sys.argv[2].encode()
+
+with open(signaturePath, "rb") as f:
+    signature = f.read()
+
+verified = hmacrypt.self_verify(signature, message)
+print(verified)

@@ -4,10 +4,11 @@ test
 test_*
 hmacenv
 __pycache__
-public_key.pem
 *.pem
 decrypted.txt
 encrypted.txt
+signed.txt
 *.enc
 *.dec
 *.part
+public_ecdsa_key.txt

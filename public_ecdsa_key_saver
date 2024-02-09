@@ -1,0 +1,3 @@
+#!./hmacenv/bin/python
+import src.hmacrypt as hmacrypt
+hmacrypt.inferECDSAKeys(hidePrivate=True, savePublic=True)

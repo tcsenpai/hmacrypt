@@ -1,5 +1,5 @@
 # hmacrypt
-encryption / decryption using RSA deterministic Key Derivation from password+hmac_secret by an hardware key.
+encryption / decryption / signing / verifying using RSA and ECDSA a deterministic Key Derivation from password+hmac_secret by an hardware key.
 
 ## Requirements (BEFORE everything else) & Credits
 
@@ -30,14 +30,15 @@ On Ubuntu 23.10 (untested on other platforms and flavors):
 ## FAQ
 
 - A .keyfile without the passphrase AND the hardware key is not usable and won't be recoverable
-- Remember to always "conda activate ./hmaenv" prior to running anything from here
+- Remember to always "conda activate ./hmacenv" prior to running anything from here
 
 ## Features
 
 - 2fa encryption/decryption using RSA deterministic Key Derivation
+- 2fa signing/verifying using ECDSA deterministic Key Derivation
 - Possibility to use the same or different keyfiles to enhance security
 - Consequently, supports for a wide range of hardware keys as long as they are compatible with libfido2
-- Low footprint: requires a single python library and a single system library
+- Low footprint: requires just two (or three) python library and a single system library
 - Readable: you are free and encouraged to tinker with this library
 
 ## What is this
@@ -72,6 +73,8 @@ The examples provided allows everybody to use this library programmatically.
 
 You can also use the standalone tools in the root folder to encrypt / decrypt files and strings.
 
+The tools allows you to sign and verify strings.
+
 Please note that the tools are just an utility and may not be suited for large data inputs.
 
 ### Documentation
@@ -92,17 +95,51 @@ Or the path you used for the library.
 
 *If you REALLY have to change the src directory name, please correct the various paths inside.*
 
-#### inferKeys
+
+#### inferECDSAKeys
 
 Definition:
 
-    def inferKeys(hidePrivate=False, savePublic=False, keyfilePath="src/bins/.keyfile")
+    def inferECDSAKeys(hidePrivate=False, savePublic=False, keyfilePath="src/bins/.keyfile")
+
+Parameters:
+
+- hidePrivate (boolean, default to False); if True, does not return the private key
+- savePublic (boolean, default to False); if True, saves the public key to a file
+- keyfilePath (string, default to the bins path); allows the usage of different keyfiles, for example to use a different hmac_secret
+
+#### inferRSAKeys
+
+Definition:
+
+    def inferRSAKeys(hidePrivate=False, savePublic=False, keyfilePath="src/bins/.keyfile")
 
 Parameters:
 
 - hidePrivate (boolean, default to False); if True, does not return the private key
 - savePublic (boolean, default to False); if True, saves the PEM encoded public key to a file
 - keyfilePath (string, default to the bins path); allows the usage of different keyfiles, for example to use a different hmac_secret
+
+#### self_sign
+
+Definition:
+
+    def self_sign(message):
+
+Parameters:
+
+- message (string); the message to sign
+
+#### self_verify
+
+Definition:
+
+    def self_verify(signature, message):
+
+Parameters:
+
+- signature (bytes); the signature to verify
+- message (string); the message that is supposed to be corresponding to the signature
 
 #### self_encrypt
 
@@ -162,6 +199,9 @@ The script encodes and encrypt a string using the same inferred RSA keypair as a
 
 The script creates, encodes and encrypts a simple text file, then decrypts it using the same keypair as above.
 
+#### string_sign_and_verify.py
+
+The script sign and verify a given string using the keypair derived from the hmac_secret + password + key
 
 ## Known Issues
 

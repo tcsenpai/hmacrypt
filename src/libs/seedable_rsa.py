@@ -30,7 +30,7 @@ def decrypt(encrypted_message, private_key):
         return None
 
 
-def generate_key(seed, nbytes=2048):
+def generate_rsa_key(seed, nbytes=2048):
     # based on https://stackoverflow.com/questions/18264314/#answer-18266970
     seed_128 = HMAC.new(
         bytes(

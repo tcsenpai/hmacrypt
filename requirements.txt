@@ -1,2 +1,3 @@
 ByteSplitter
 pycrypto
+ecdsa

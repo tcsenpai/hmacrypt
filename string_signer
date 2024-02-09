@@ -1,0 +1,20 @@
+#!./hmacenv/bin/python
+
+import src.hmacrypt as hmacrypt
+import sys
+import os
+
+# Getting and requiring exactly 1 argument
+if len(sys.argv) != 2:
+    print("Usage: python3 string_signer <string>")
+    sys.exit(1)
+
+stringToSign = sys.argv[1].encode()
+
+
+signed = hmacrypt.self_sign(stringToSign)
+
+with open("signed.txt", "wb+") as signedFile:
+    signedFile.write(signed)
+
+print(signed)

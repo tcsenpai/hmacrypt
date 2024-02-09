@@ -1,0 +1,3 @@
+#!./hmacenv/bin/python
+import src.hmacrypt as hmacrypt
+hmacrypt.inferRSAKeys(hidePrivate=True, savePublic=True)
