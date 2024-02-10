@@ -3,6 +3,7 @@ import hashlib
 from Crypto import Random
 from Crypto.Cipher import AES
 
+# LINK Implementation of seedable AES encryption thanks to: https://stackoverflow.com/a/21928790
 class AESCipher(object):
 
     def __init__(self, key):
@@ -28,9 +29,10 @@ class AESCipher(object):
     def _unpad(s):
         return s[:-ord(s[len(s)-1:])]
     
-# Implementable methods
-# NOTE The cipher is initialized on the fly, so the seed is not stored
 
+# SECTION implementable methods
+# NOTE The cipher is initialized on the fly, so the seed is not stored
+    
 def self_encrypt_aes(seed, message):
     cipher = AESCipher(seed)
     encrypted = cipher.encrypt(message)
