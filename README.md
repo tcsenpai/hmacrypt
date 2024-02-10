@@ -1,5 +1,19 @@
 # hmacrypt
-encryption / decryption / signing / verifying using RSA and ECDSA a deterministic Key Derivation from password+hmac_secret by an hardware key.
+encryption / decryption / signing / verifying using RSA, AES and ECDSA a deterministic Key Derivation from password+hmac_secret by an hardware key.
+
+## Supported algorithms
+
+- RSA (deterministic with keyfile, password and hw device)
+- ECDSA (deterministic with keyfile, password and hw device)
+- AES 256 (deterministic with keyfile, password and hw device)
+
+## Tested devices
+
+- Thetis FIDO2
+
+### Should also work with
+
+Any FIDO2/U2F key having hmac_secrets extension
 
 ## Requirements (BEFORE everything else) & Credits
 
@@ -36,6 +50,7 @@ On Ubuntu 23.10 (untested on other platforms and flavors):
 
 - 2fa encryption/decryption using RSA deterministic Key Derivation
 - 2fa signing/verifying using ECDSA deterministic Key Derivation
+- 2fa AES cipher encryption/decryption using SHA256
 - Possibility to use the same or different keyfiles to enhance security
 - Consequently, supports for a wide range of hardware keys as long as they are compatible with libfido2
 - Low footprint: requires just two (or three) python library and a single system library
@@ -94,6 +109,27 @@ As per the various examples, you can then import the library with:
 Or the path you used for the library.
 
 *If you REALLY have to change the src directory name, please correct the various paths inside.*
+
+
+#### encrypt_aes
+
+Definition:
+    
+    def encrypt_aes(message)
+
+Parameters:
+
+- message; data (string preferrable) to be encrypted
+
+#### decrypt_aes
+
+Definition:
+
+    def decrypt_aes(encrypted)
+
+Parameters:
+
+- encrypted; (usually) bytes to be decrypted
 
 
 #### inferECDSAKeys

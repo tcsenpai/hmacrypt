@@ -1,6 +1,7 @@
 import subprocess
 from src.libs.seedable_rsa import decrypt, encrypt, generate_rsa_key
 from src.libs.seedable_ecdsa import generate_ecdsa_key, sign, verify
+from src.libs.seedable_aes import self_encrypt_aes, self_decrypt_aes
 
 # INFO This method derives the HMAC secret from the hardware key and the stored secret
 def getHMACSecret(keyfilePath="src/bins/.keyfile"):
@@ -14,6 +15,17 @@ def getHMACSecret(keyfilePath="src/bins/.keyfile"):
     hmac_secret = hmac_secret_dirty.splitlines()[-1]
     hmac_secret = hmac_secret.strip()
     return hmac_secret
+
+# INFO The following methods are proxies to the AES methods
+# NOTE The AES methods generate a cipher on the fly based on the getHMACSecret method
+
+def encrypt_aes(message):
+    seed = getHMACSecret()
+    return self_encrypt_aes(seed, message)
+
+def decrypt_aes(encrypted):
+    seed = getHMACSecret()
+    return self_decrypt_aes(seed, encrypted)
 
 # INFO This method derives an ECDSA keypair from the stored secret and the hardware key
 def inferECDSAKeys(hidePrivate=False, savePublic=False):
@@ -108,12 +120,3 @@ def self_decrypt_file(filepath, outpath):
 
 
 # TODO LARGE FILES
-
-
-# Self testing
-if __name__ == "__main__":
-    private_key, public_key = inferRSAKeys()
-    secret = encrypt("secret message", public_key)
-    print(secret)
-    decrypted = decrypt(secret, private_key)
-    print(decrypted)
